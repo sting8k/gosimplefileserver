@@ -7,7 +7,6 @@ A secure and user-friendly HTTP file server written in Go that provides password
 - 🔒 Password-protected access
 - 📁 Directory browsing with clean UI
 - ⬆️ File upload support
-- 🔐 Session-based authentication
 - 🛡️ Path traversal protection
 - 📦 No external dependencies
 - 📱 Mobile-friendly interface
@@ -15,7 +14,7 @@ A secure and user-friendly HTTP file server written in Go that provides password
 ## Installation
 
 ```bash
-git clone https://github.com/yourusername/gosimplefileserver.git
+git clone https://github.com/sting8k/gosimplefileserver.git
 cd gosimplefileserver
 go build
 ```
@@ -23,7 +22,10 @@ go build
 ## Usage
 
 ```bash
-# Basic usage with required password
+# Basic usage (password will be auto-generated if not provided)
+./gosimplefileserver
+
+# With specific password
 ./gosimplefileserver -password yourpassword
 
 # Full options example
@@ -31,35 +33,29 @@ go build
   -host 0.0.0.0 \
   -port 8080 \
   -password yourpassword \
-  -dir /path/to/serve \
   -max-upload-size 100
 ```
 
 ### Command Line Options
 
 - `-host`, `-H`: IP address to listen on (default: "0.0.0.0")
-- `-port`, `-p`: HTTP port (default: "8080")
-- `-password`, `-pw`: Access password (required)
-- `-dir`: Root directory to serve (default: current directory)
+- `-port`, `-p`: HTTP port (default: "8080") 
+- `-password`, `-pw`: Access password (auto-generates if not set)
 - `-max-upload-size`: Maximum upload file size in MB (default: 100)
+- `-version`: Show version information
 
 ## Security Features
 
-- Session-based authentication using HMAC
+- URL-based password authentication
 - Protection against path traversal attacks
-- Secure cookie handling with HttpOnly flag
-- Input sanitization for uploaded filenames
+- Input validation for uploaded files
 - Maximum upload size limit
-
-## Browser Support
-
-The web interface is compatible with all modern browsers and is responsive for mobile devices.
 
 ## Development
 
 ### Requirements
 
-- Go 1.24.3 or higher
+- Go 1.20 or higher
 
 ### Running Tests
 
