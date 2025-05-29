@@ -1,0 +1,9 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		"ghcr.io/azutake/devcontainer-features/go-packages-install:0": {},
+		"ghcr.io/marcozac/devcontainer-features/goreleaser:1": {},
+		"ghcr.io/szkiba/devcontainer-features/gosec:1": {},
+		"ghcr.io/szkiba/devcontainer-features/govulncheck:1": {}
+	}
+}
