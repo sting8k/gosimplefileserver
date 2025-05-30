@@ -89,6 +89,38 @@ func TestAuthMiddleware(t *testing.T) {
 			url:            "/subdir?pw=" + testPassword,
 			expectedStatus: http.StatusNotFound, // Since directory doesn't exist
 		},
+		{
+			name:           "valid password and existing file",
+			url:            "/testfile.txt?pw=" + testPassword,
+			expectedStatus: http.StatusOK,
+			expectBody:     "Test File Content",
+		},
+		{
+			name:           "valid password, non-existing file",
+			url:            "/nonexistent.txt?pw=" + testPassword,
+			expectedStatus: http.StatusNotFound,
+			expectBody:     "",
+		},
+		{
+			name:           "upload endpoint without password",
+			url:            "/upload",
+			expectedStatus: http.StatusUnauthorized,
+			expectBody:     "Access Denied",
+		},
+		{
+			name:           "upload endpoint with valid password",
+			url:            "/upload?pw=" + testPassword,
+			expectedStatus: http.StatusMethodNotAllowed, // Expecting 405 as it requires POST
+			expectBody:     "",
+		},
+	}
+
+	// Create a test file
+	testFileContent := "Test File Content"
+	testFilePath := filepath.Join(tmpDir, "testfile.txt")
+	err = os.WriteFile(testFilePath, []byte(testFileContent), 0644)
+	if err != nil {
+		t.Fatalf("Failed to create test file: %v", err)
 	}
 
 	for _, tt := range tests {
