@@ -33,7 +33,8 @@ go build
   -host 0.0.0.0 \
   -port 8080 \
   -password yourpassword \
-  -max-upload-size 100
+  -max-upload-size 100 \
+  -dir /path/to/serve
 ```
 
 ### Command Line Options
@@ -42,6 +43,7 @@ go build
 - `-port`, `-p`: HTTP port (default: "8080") 
 - `-password`, `-pw`: Access password (auto-generates if not set)
 - `-max-upload-size`: Maximum upload file size in MB (default: 100)
+- `-dir`: Directory to serve files from (default: current directory)
 - `-version`: Show version information
 
 ## Security Features
